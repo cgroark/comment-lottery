@@ -1,0 +1,53 @@
+
+body{
+    max-width: 1000px;
+    margin:3rem  auto;
+    padding: 0 40px;
+}
+h3{
+    color:#004D99;
+    margin: 0 0 30px 0;
+}
+footer{
+    padding-top: 30px;
+    border-top: 2px solid #004D99;
+    a{
+        background-image: none;
+    }
+}
+form{
+    margin-top: 30px;
+}
+h1{
+    border-bottom: 2px solid #004D99;
+}
+input[type="submit"], button{
+    color: white;
+    background-color: #004D99;
+    border: none;
+    padding: 4px 10px;
+    margin-bottom: 20px;
+}
+
+input[type="submit"]:hover, button:hover{
+    background-color: #0059b3;
+    cursor: pointer;
+}
+
+li {
+    a{
+        color: #cc0099;
+        background-image: none;
+    }
+    a:hover{
+        color: #800060
+    }
+}
+form.loading {
+    label{
+        color: lightgrey;
+    }
+    input[type="submit"]{
+        background-color: lightblue;
+    }
+}
