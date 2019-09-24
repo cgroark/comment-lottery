@@ -1,16 +1,16 @@
 
 body{
-    max-width: 1000px;
+    max-width: 1200px;
     margin:3rem  auto;
     padding: 0 40px;
 }
 h3{
-    color:#004D99;
+    color:#8b3f63;
     margin: 0 0 15px 0;
 }
 footer{
     padding-top: 30px;
-    border-top: 2px solid #004D99;
+    border-top: 2px solid #8b3f63;
     img{
         margin-bottom: 5px;
     }
@@ -29,28 +29,29 @@ form{
     margin-top: 30px;
 }
 h1{
-    border-bottom: 2px solid #004D99;
+    border-bottom: 2px solid #8b3f63;
+
 }
 input[type="submit"], button{
-    color: white;
-    background-color: #004D99;
+    color: black;
+    background-color: #ffa500;
     border: none;
     padding: 4px 10px;
     margin-bottom: 20px;
 }
 
 input[type="submit"]:hover, button:hover{
-    background-color: #0059b3;
+    background-color: #d48a02;
     cursor: pointer;
 }
 
 li {
     a{
-        color: #cc0099;
+        color: #00aeb3;
         background-image: none;
     }
     a:hover{
-        color: #800060
+        color: #03979c;
     }
 }
 form.loading {
@@ -63,13 +64,53 @@ form.loading {
 }
 
 table.queue-table{
-    tbody td{
-        padding-left: 15px !important;
-    }
     tbody{
         tr:nth-of-type(1), tr:nth-of-type(2), tr:nth-of-type(3), tr:nth-of-type(4), tr:nth-of-type(5){
-            background-color: #99ccff;
+            background-color: rgba(139, 63, 99, .8);
             font-weight: bold;
+            color: white;
+            border-bottom: 2px solid white;
         }
     } 
+}
+table{
+    tbody td{
+        padding-left: 15px !important;
+        font-size: 26px;
+    }
+    thead th{
+        font-size: 26px;
+        font-weight: bold;
+    }
+}
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    width: 100%;
+}
+.col-md-8, .col-md-4{
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media screen and (min-width: 768px){
+    .col-md-4 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+  }
+  
+@media screen and  (min-width: 768px){
+  .col-md-8 {
+      -ms-flex: 0 0 66.666667%;
+      flex: 0 0 66.666667%;
+      max-width: 66.666667%;
+  }
 }

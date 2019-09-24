@@ -60,17 +60,17 @@ getGoogleAPI(){
         })
 }
 renderData(){
-  return this.state.allData.sort((a, b) => a.rank - b.rank).filter(one => one.status === "On Deck").map((each, index) => 
+  return this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank).map((each, index) => 
     <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
   )
 }
 renderSpoken(){
-  return this.state.allData.sort((a, b) => a.rank - b.rank).filter(one => one.status === "Spoken").map((each, index) => 
+  return this.state.allData.filter(one => one.status === "Spoken").sort((a, b) => a.rank - b.rank).map((each, index) => 
     <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
   )
 }
 renderNoShow(){
-  return this.state.allData.sort((a, b) => a.rank - b.rank).filter(one => one.status === "No Show").map((each, index) => 
+  return this.state.allData.filter(one => one.status === "No Show").sort((a, b) => a.rank - b.rank).map((each, index) => 
     <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
   )
 }
@@ -79,44 +79,66 @@ renderNoShow(){
         return(
           <Layout>
           <h3>On Deck to Comment</h3>
-          <table className="queue-table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Ticketnumber</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.renderData()}
-            </tbody>
-          </table>
-          <h3>Already Spoke</h3>
-          <table className="other-table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Ticketnumber</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.renderSpoken()}
-            </tbody>
-          </table>
-          <h3>No Show</h3>
-          <table className="other-table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Ticketnumber</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.renderNoShow()}
-            </tbody>
-          </table>
+          <div className="row">
+            <div className="col-md-8">
+            <table className="queue-table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Ticketnumber</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.renderData()}
+                </tbody>
+              </table>
+            </div>
+            <div className="col-md-4">
+              <h4>Please help us accommodate as many people tonight as possible:​</h4>
+                <ul>
+                  <li>Less than two minutes per speaker ​</li>
+                  <li>One turn at the mic​</li>
+                  <li>Clapping/cheering slows us down – please raise your hand instead​</li>
+                  <li>We are not audio-recording​</li>
+                </ul>
+              <p><strong>Don’t miss your turn! </strong>Please be seated in one of our five “waiting” chairs as your turn approaches.​</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-8">
+              <h3>Already Spoke</h3>
+              <table className="other-table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Ticketnumber</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.renderSpoken()}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-8">
+              <h3>No Show</h3>
+              <table className="other-table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Ticketnumber</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {this.renderNoShow()}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </Layout>
         )
     }

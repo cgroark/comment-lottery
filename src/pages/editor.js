@@ -47,6 +47,8 @@ class Editor extends Component{
             })
         }
         this.setState({allData: masterArray})
+        console.log('masater', masterArray)
+
     }
     getGoogleAPI(){
         fetch(' https://spreadsheets.google.com/feeds/cells/18MOKfU9x2mWVzOJcQ_OW0_4QGyHxAkvv8plV2EuO0fE/1/public/full?alt=json')
@@ -95,6 +97,7 @@ class Editor extends Component{
     }
    
     renderData(){
+        console.log('this one', this.state.allData.sort((a, b) => a.rank - b.rank))
         var queueLine = this.state.allData.filter(one => one.status === "On Deck").length
         return this.state.allData.sort((a, b) => a.rank - b.rank).map((each, index) => 
             <tr key={each.ticket}><td>{each.rank}</td><td>{each.first}</td><td>{each.ticket}</td><td>{each.status}</td>
