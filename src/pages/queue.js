@@ -44,7 +44,7 @@ setOtherStates(){
             rank: this.state.rank[i].content.$t
         })
     }
-    this.setState({allData: masterArray.sort((a, b) => a.ticket - b.ticket).filter(one => one.status === "On Deck")})
+    this.setState({allData: masterArray})
     console.log(this.state.allData)
 
 }
@@ -59,16 +59,27 @@ getGoogleAPI(){
              this.setOtherStates()
         })
 }
-  renderData(){
-    return this.state.allData.sort((a, b) => a.rank - b.rank).map((each, index) => 
-      <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
-    )
-  }
+renderData(){
+  return this.state.allData.sort((a, b) => a.rank - b.rank).filter(one => one.status === "On Deck").map((each, index) => 
+    <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
+  )
+}
+renderSpoken(){
+  return this.state.allData.sort((a, b) => a.rank - b.rank).filter(one => one.status === "Spoken").map((each, index) => 
+    <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
+  )
+}
+renderNoShow(){
+  return this.state.allData.sort((a, b) => a.rank - b.rank).filter(one => one.status === "No Show").map((each, index) => 
+    <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
+  )
+}
+
     render(){
         return(
           <Layout>
           <h3>On Deck to Comment</h3>
-          <table>
+          <table className="queue-table">
             <thead>
               <tr>
                 <th>Order</th>
@@ -78,6 +89,32 @@ getGoogleAPI(){
             </thead>
             <tbody>
             {this.renderData()}
+            </tbody>
+          </table>
+          <h3>Already Spoke</h3>
+          <table className="other-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Ticketnumber</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.renderSpoken()}
+            </tbody>
+          </table>
+          <h3>No Show</h3>
+          <table className="other-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Ticketnumber</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.renderNoShow()}
             </tbody>
           </table>
         </Layout>
