@@ -2,7 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Link } from "gatsby"
 import Header from "../components/header"
-
+const logo = require('../images/2017_PO_header_gray.png');
 
 const ListLink = props => (
   <li style={{ display: `inline-block`, marginRight: `1rem` }}>
@@ -35,7 +35,10 @@ export default ({ children }) => {
           <ListLink to="/contact/">Contact</ListLink> */}
         </ul>
       {children}
-      <footer>Copyright &copy; 2019 <a href='https://www.enviroissues.com' target='_blank'>EnviroIssues</a></footer>
+      <footer>
+        <img src={logo} />
+        <p>Copyright &copy; 2019 <a href='https://www.enviroissues.com' target='_blank'>EnviroIssues</a></p>
+        </footer>
     </div>
   )
 }
