@@ -22,7 +22,6 @@ class Editor extends Component{
       }
       
     setOtherStates(){
-        console.log('reached')
         const firstName = this.state.googleData.filter(firstName => firstName.gs$cell.col === "1").filter(removed => removed.content.$t !== "firstName")
         const lastName = this.state.googleData.filter(firstName => firstName.gs$cell.col === "2").filter(removed => removed.content.$t !== "lastName")
         const ticketArray = this.state.googleData.filter(firstName => firstName.gs$cell.col === "3").filter(removed => removed.content.$t !== "ticketNumber")
@@ -47,8 +46,7 @@ class Editor extends Component{
                
             })
         }
-        this.setState({allData: masterArray.sort((a, b) => a.ticket - b.ticket)})
-        console.log(this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank))
+        this.setState({allData: masterArray})
     }
     getGoogleAPI(){
         fetch(' https://spreadsheets.google.com/feeds/cells/18MOKfU9x2mWVzOJcQ_OW0_4QGyHxAkvv8plV2EuO0fE/1/public/full?alt=json')
@@ -62,7 +60,6 @@ class Editor extends Component{
             })
     }
     updateStatus = (ticketNumber, e) => {
-        console.log('reached updated status')
         console.log('updating ', ticketNumber, ' to ', e.target.value)
         fetch("https://sheetsu.com/apis/v1.0su/bf01d81615f1/ticketNumber/"+ticketNumber, {
             headers: {
@@ -82,7 +79,13 @@ class Editor extends Component{
             var currentlyOnDeck = this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank)
             var currentRank = parseInt(currentlyOnDeck[currentlyOnDeck.length-1].rank)
             console.log('current rank in update status is ', currentRank )
-            const nextInLine = this.state.allData.filter(one => one.status === "Waiting")[0];
+            var currentlyWaiting = this.state.allData.filter(one => one.status === "Waiting")
+            for(var i = currentlyWaiting.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1)); 
+                [currentlyWaiting[i], currentlyWaiting[j]] = [ currentlyWaiting[j],  currentlyWaiting[i]];
+            }
+            const nextInLine = currentlyWaiting[0];
+            console.log(nextInLine, ' is nexxt in line');
             if(nextInLine){
                 console.log('next in line is ', nextInLine)
                 this.putOnDeck(nextInLine.ticket, currentRank+1)
@@ -107,8 +110,9 @@ class Editor extends Component{
             </tr>
         )
     }
-    putOnDeck = (ticketNumber, rank) => {
-        console.log('putting ' + ticketNumber + " on deck with rank", rank)
+    putOnDeck = (ticketNumber, rank, i) => {
+        this.setState({loading: true})
+        console.log(this.state.loading, 'before fetch')
         fetch("https://sheetsu.com/apis/v1.0su/bf01d81615f1/ticketNumber/"+ticketNumber, {
             headers: {
                 'Accept': 'application/json',
@@ -124,22 +128,37 @@ class Editor extends Component{
         }).then( (json) => {
                this.getGoogleAPI()
         });
+       
     }
     generateQueue = () => {
         var currentlyWaiting = this.state.allData.filter(one => one.status === "Waiting")
-        console.log('reached queue generator - currently waiting', currentlyWaiting)
-        var i =0;
-        while(i < currentlyWaiting.length && i < 15){
-            var rank = i+1
-            var needsUpdate = currentlyWaiting[i].ticket
-            this.putOnDeck(needsUpdate, rank)
-            i++
+        for(var i = currentlyWaiting.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1)); 
+            [currentlyWaiting[i], currentlyWaiting[j]] = [ currentlyWaiting[j],  currentlyWaiting[i]];
+        }
+        console.log('number waiting', currentlyWaiting.length)
+        var totalAdded
+        if(currentlyWaiting.length == 15){
+            totalAdded = 15;
+        }else{
+            totalAdded = currentlyWaiting.length;
+        }
+        console.log('total added is', totalAdded)
+        var l =0;
+        while(l < currentlyWaiting.length && l < 15){
+            var rank = l+1
+            var needsUpdate = currentlyWaiting[l].ticket
+            l++
+            this.putOnDeck(needsUpdate, rank, i)
         }
     }
     addToQueue = () => {
         var currentlyWaiting = this.state.allData.filter(one => one.status === "Waiting")
+        for(var i = currentlyWaiting.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1)); 
+            [currentlyWaiting[i], currentlyWaiting[j]] = [ currentlyWaiting[j],  currentlyWaiting[i]];
+        }
         var currentlyOnDeck = this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank)
-        console.log(currentlyOnDeck)
         var currentRank = parseInt(currentlyOnDeck[currentlyOnDeck.length-1].rank)
         console.log('current rank is ', currentRank)
         var j = 0;

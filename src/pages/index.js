@@ -8,7 +8,7 @@ class MainWrapper extends Component{
     render(){
         return(
             <Layout>
-                   <h3>Add Your Name</h3>
+                   <h3>Enter ticket number</h3>
                     <Form />
             </Layout>
         )

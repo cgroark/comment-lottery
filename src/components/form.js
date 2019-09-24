@@ -17,9 +17,8 @@ class Form extends Component{
     })
     handleSubmit = event => {
         const dataSend = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-
+            firstName: 'N/A',
+            lastName: 'N/A',
             ticketNumber: this.state.ticketNumber,
             status: 'Waiting',
             rank: 'unset'
@@ -48,11 +47,11 @@ class Form extends Component{
         });
       }
     render(){
-        const { firstName, lastName, ticketNumber } = this.state;
+        const { ticketNumber } = this.state;
         const submitting = this.state.submitting;
         return(
             <form onSubmit={this.handleSubmit} className={submitting ? 'loading' : 'submit-form'}>
-                    <p>
+                    {/* <p>
                         <label >First Name<br />
                         <input type="text" name='firstName' value={firstName} onChange={this.handleChange} />
                          </label>
@@ -61,7 +60,7 @@ class Form extends Component{
                         <label >Last name<br />
                             <input type="text" name='lastName' value={lastName} onChange={this.handleChange} /> 
                         </label>
-                    </p>
+                    </p> */}
                     <p>
                         <label>Ticket Number<br />
                             <input type="number" name="ticketNumber" value={ticketNumber}  onChange={this.handleChange} />

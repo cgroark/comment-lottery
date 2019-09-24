@@ -61,7 +61,7 @@ getGoogleAPI(){
 }
   renderData(){
     return this.state.allData.sort((a, b) => a.rank - b.rank).map((each, index) => 
-      <tr key={each.ticket}><td>{each.rank}</td><td>{each.first}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
+      <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
     )
   }
     render(){
@@ -72,7 +72,6 @@ getGoogleAPI(){
             <thead>
               <tr>
                 <th>Order</th>
-                <th>Name</th>
                 <th>Ticketnumber</th>
                 <th>Status</th>
               </tr>
