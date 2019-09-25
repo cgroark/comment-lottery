@@ -47,7 +47,6 @@ class Editor extends Component{
             })
         }
         this.setState({allData: masterArray})
-        console.log('masater', masterArray)
 
     }
     getGoogleAPI(){
@@ -97,9 +96,8 @@ class Editor extends Component{
     }
    
     renderData(){
-        console.log('this one', this.state.allData.sort((a, b) => a.rank - b.rank))
         var queueLine = this.state.allData.filter(one => one.status === "On Deck").length
-        return this.state.allData.sort((a, b) => a.rank - b.rank).map((each, index) => 
+        return this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank).map((each, index) => 
             <tr key={each.ticket}><td>{each.rank}</td><td>{each.first}</td><td>{each.ticket}</td><td>{each.status}</td>
                 {queueLine >= 1 &&
                 <td>
@@ -110,6 +108,14 @@ class Editor extends Component{
                 </select>
                 </td>
                 }
+            </tr>
+        )
+    }
+    renderRest(){
+        console.log('rest',this.state.allData)
+        return this.state.allData.filter(one => one.status === "Waiting" || one.status === "Spoken" || one.status === "No Show").sort((a, b) => a.ticket - b.ticket).map((each, index) => 
+            <tr key={each.ticket}><td>{each.rank}</td><td>{each.first}</td><td>{each.ticket}</td><td>{each.status}</td>
+            
             </tr>
         )
     }
@@ -186,6 +192,7 @@ class Editor extends Component{
                          <p>Looks like you haven't added the first 15 to the queue. Click Generate Queue button below to add the first 15 to the on-deck queue</p>
                             <button  onClick={this.generateQueue}>Generate Queue</button>  
                     </div>
+                    <h2>On Deck</h2>
                     <table>
                         <thead>
                             <tr>
@@ -199,6 +206,20 @@ class Editor extends Component{
                             {this.renderData()}
                         </tbody>
                     </table>
+                    <h2>Waiting and Complete</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Name</th>
+                                <th>Ticketnumber</th>
+                                <th>Status</th>
+                            </tr>
+                         </thead>
+                        <tbody>
+                            {this.renderRest()}
+                        </tbody>
+                    </table>
                 </Layout>  
             )
         }else if(numberOnDeck >= 1 && numberOnDeck <15){
@@ -209,6 +230,7 @@ class Editor extends Component{
                         <p>Looks like your queue is less than 15. Click button below to add to the current queue.</p>
                         <button  onClick={this.addToQueue}>Add to Queue</button>
                     </div>
+                    <h2>On Deck</h2>
                     <table>
                         <thead>
                             <tr>
@@ -225,6 +247,20 @@ class Editor extends Component{
                         {this.renderData()}
                         </tbody>
                     </table>
+                    <h2>Waiting and Complete</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Name</th>
+                                <th>Ticketnumber</th>
+                                <th>Status</th>
+                            </tr>
+                         </thead>
+                        <tbody>
+                            {this.renderRest()}
+                        </tbody>
+                    </table>
                 </Layout>
             )
         }else{
@@ -234,6 +270,7 @@ class Editor extends Component{
                         <p>You've set your initial queue</p>
                         <p>Change the status of the 'on-deck' tickets below to add next in line to the queue</p>
                     </div>
+                    <h2>On Deck</h2>
                     <table>
                         <thead>
                             <tr>
@@ -248,6 +285,20 @@ class Editor extends Component{
                         </thead>
                         <tbody>
                         {this.renderData()}
+                        </tbody>
+                    </table>
+                    <h2>Waiting and Complete</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Name</th>
+                                <th>Ticketnumber</th>
+                                <th>Status</th>
+                            </tr>
+                         </thead>
+                        <tbody>
+                            {this.renderRest()}
                         </tbody>
                     </table>
                 </Layout>

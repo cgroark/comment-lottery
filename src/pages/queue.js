@@ -60,6 +60,7 @@ getGoogleAPI(){
         })
 }
 renderData(){
+  console.log('filtered', this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank))
   return this.state.allData.filter(one => one.status === "On Deck").sort((a, b) => a.rank - b.rank).map((each, index) => 
     <tr key={each.ticket}><td>{each.rank}</td><td>{each.ticket}</td><td>{each.status}</td></tr>
   )
@@ -97,7 +98,7 @@ renderNoShow(){
             <div className="col-md-4">
               <h4>Please help us accommodate as many people tonight as possible:​</h4>
                 <ul>
-                  <li>Less than two minutes per speaker ​</li>
+                  <li>Up to two minutes per speaker ​</li>
                   <li>One turn at the mic​</li>
                   <li>Clapping/cheering slows us down – please raise your hand instead​</li>
                   <li>We are not audio-recording​</li>
@@ -107,7 +108,7 @@ renderNoShow(){
           </div>
           <div className="row">
             <div className="col-md-8">
-              <h3>Already Spoke</h3>
+              <h3>Complete</h3>
               <table className="other-table">
                 <thead>
                   <tr>
