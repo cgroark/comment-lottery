@@ -59,7 +59,20 @@ form.loading {
         color: lightgrey;
     }
     input[type="submit"]{
-        background-color: lightblue;
+        background-color: #f5e1bc;
+    }
+}
+div.load-data{
+    input[type="submit"]{
+        background-color: #f5e1bc;
+    }
+    .editor-table th{
+        color: #d9d9d9;
+    }
+}
+table.updating-status{
+    th, td, select{
+        color: #d9d9d9;
     }
 }
 
