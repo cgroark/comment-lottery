@@ -268,7 +268,7 @@ class Updatequeue extends Component{
                     <li>Clapping/cheering slows us down – please raise your hand instead​</li>
                     <li>We are not audio-recording​</li>
                   </ul>
-                <p><strong>Don’t miss your turn! </strong>Please be seated in one of our five “waiting” chairs as your turn approaches.​</p>
+                <p className="queue-highlight"><strong>Don’t miss your turn! </strong>Please be seated in one of our five “waiting” chairs as your turn approaches.​</p>
               </div>
             </div>
             <div className="row">

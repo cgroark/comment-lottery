@@ -4,6 +4,9 @@ body{
     margin:3rem  auto;
     padding: 0 40px;
 }
+body, h1, h2, h3, h4, p, a{
+    font-family: "Source Sans Pro","Helvetica","Arial",sans-serif !important;
+}
 h3{
     color:#8b3f63;
     margin: 0 0 15px 0;
@@ -111,7 +114,10 @@ table{
   padding-right: 15px;
   padding-left: 15px;
 }
-
+.queue-highlight{
+    border: 4px solid #8b3f63;
+    padding: 15px;
+}
 @media screen and (min-width: 768px){
     .col-md-4 {
         -ms-flex: 0 0 33.333333%;
